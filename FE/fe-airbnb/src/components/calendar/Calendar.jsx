@@ -1,7 +1,8 @@
 import moment from 'moment';
-import { useState } from 'react';
 import styled from 'styled-components';
+import { useState } from 'react';
 import CalendarHeader from './CalendarHeader';
+import DateHeader from './DateHeader';
 
 const Calendar = (props) => {
   const [calendar, setCalendar] = useState(moment());
@@ -15,6 +16,7 @@ const Calendar = (props) => {
   return (
     <CalendarContainer>
       <CalendarHeader calendarYM={calendarYM} moveMonth={moveMonth} />
+      <DateHeader />
     </CalendarContainer>
   );
 };
