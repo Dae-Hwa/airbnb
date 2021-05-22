@@ -1,13 +1,13 @@
-import moment from 'moment';
+import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import { CalendarContext } from './CalendarModal';
 import CalendarHeader from './CalendarHeader';
 import DayNames from './DayNames';
 import buildCalendar from './build';
 
 const Calendar = (props) => {
-  const [calendarMatrix, setCalendarMatrix] = useState([]);
-  const [calendar, setCalendar] = useState(moment()); // value
+  const { calendarMatrix, setCalendarMatrix, calendar, setCalendar } =
+    useContext(CalendarContext);
 
   useEffect(() => {
     setCalendarMatrix(buildCalendar(calendar));

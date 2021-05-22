@@ -1,7 +1,7 @@
 import { Flex } from '@chakra-ui/layout';
 import styled from 'styled-components';
 
-const CalendarHeader = ({ calendar, setCalendar }) => {
+const CalendarHeader = ({ calendar }) => {
   function currYear() {
     return calendar.format('YYYY');
   }

@@ -1,10 +1,26 @@
+import { useState, createContext } from 'react';
+import moment from 'moment';
 import styled from 'styled-components';
 import { Flex, Spacer } from '@chakra-ui/layout';
 import Calendar from './Calendar';
 import { ReactComponent as LeftArrowIcon } from '../../icon/chevron-left.svg';
 import { ReactComponent as RightArrowIcon } from '../../icon/chevron-right.svg';
 
+export const CalendarContext = createContext();
+
 const CalendarModal = (props) => {
+  const [calendarMatrix, setCalendarMatrix] = useState([]);
+  const [calendar, setCalendar] = useState(moment()); // value
+
+  const calendarState = {
+    values: {
+      calendarMatrix,
+      setCalendarMatrix,
+      calendar,
+      setCalendar,
+    },
+  };
+
   // function prevMonth() {
   //   return calendar.clone().subtract(1, 'month');
   // }
@@ -14,31 +30,33 @@ const CalendarModal = (props) => {
   // }
 
   return (
-    <CalendarModalContainer>
-      <Flex justify="center">
-        <Controller>
-          <Flex>
-            <LeftArrowIcon
-            // onClick={() => {
-            //   setCalendar(prevMonth());
-            // }}
-            />
-            <Spacer />
-            <RightArrowIcon
-            // onClick={() => {
-            //   setCalendar(nextMonth());
-            // }}
-            />
-          </Flex>
-        </Controller>
-      </Flex>
+    <CalendarContext.Provider value={calendarState.values}>
+      <CalendarModalContainer>
+        <Flex justify="center">
+          <Controller>
+            <Flex>
+              <LeftArrowIcon
+              // onClick={() => {
+              //   setCalendar(prevMonth());
+              // }}
+              />
+              <Spacer />
+              <RightArrowIcon
+              // onClick={() => {
+              //   setCalendar(nextMonth());
+              // }}
+              />
+            </Flex>
+          </Controller>
+        </Flex>
 
-      <Flex>
-        <Calendar />
-        <Spacer />
-        <Calendar />
-      </Flex>
-    </CalendarModalContainer>
+        <Flex>
+          <Calendar />
+          <Spacer />
+          <Calendar />
+        </Flex>
+      </CalendarModalContainer>
+    </CalendarContext.Provider>
   );
 };
 
