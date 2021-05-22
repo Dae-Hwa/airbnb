@@ -3,24 +3,49 @@ import styled from 'styled-components';
 import { ReactComponent as LeftArrowIcon } from '../../icon/chevron-left.svg';
 import { ReactComponent as RightArrowIcon } from '../../icon/chevron-right.svg';
 
-const CalendarHeader = ({ calendarYM, moveMonth }) => {
+const CalendarHeader = ({ calendar, setCalendar }) => {
+  function currYear() {
+    return calendar.format('YYYY');
+  }
+
+  function currMonthName() {
+    return calendar.format('MM');
+  }
+
+  function prevMonth() {
+    return calendar.clone().subtract(1, 'month');
+  }
+
+  function nextMonth() {
+    return calendar.clone().add(1, 'month');
+  }
+
   return (
     <Flex>
       <LeftArrowIcon
         onClick={() => {
-          moveMonth(-1);
+          setCalendar(prevMonth());
         }}
       />
-      <H2>{calendarYM}</H2>
+      <Title>
+        {currYear()}년 {currMonthName()}월
+      </Title>
       <RightArrowIcon
         onClick={() => {
-          moveMonth(1);
+          setCalendar(nextMonth());
         }}
       />
     </Flex>
   );
 };
 
-const H2 = styled.h2``;
+const Title = styled.div`
+  width: 336px;
+  display: flex;
+  justify-content: center;
+  font-size: ${({ theme }) => theme.fontSizes.SM};
+  font-weight: bold;
+  margin-bottom: 16px;
+`;
 
 export default CalendarHeader;
