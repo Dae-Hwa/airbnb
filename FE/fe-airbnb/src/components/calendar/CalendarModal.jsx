@@ -2,9 +2,9 @@ import { useState, createContext } from 'react';
 import moment from 'moment';
 import styled from 'styled-components';
 import { Flex, Spacer } from '@chakra-ui/layout';
-import Calendar from './Calendar';
 import { ReactComponent as LeftArrowIcon } from '../../icon/chevron-left.svg';
 import { ReactComponent as RightArrowIcon } from '../../icon/chevron-right.svg';
+import CalendarList from './CalendarList';
 
 export const CalendarContext = createContext();
 
@@ -50,11 +50,9 @@ const CalendarModal = (props) => {
           </Controller>
         </Flex>
 
-        <Flex>
-          <Calendar />
-          <Spacer />
-          <Calendar />
-        </Flex>
+        <ViewArea>
+          <CalendarList />
+        </ViewArea>
       </CalendarModalContainer>
     </CalendarContext.Provider>
   );
@@ -73,6 +71,11 @@ const Controller = styled.div`
   position: absolute;
   top: 60px;
   width: 80%;
+`;
+
+const ViewArea = styled.div`
+  width: 100%;
+  overflow: hidden;
 `;
 
 export default CalendarModal;
