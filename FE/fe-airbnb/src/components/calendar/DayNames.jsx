@@ -19,7 +19,9 @@ const DayName = styled.li`
   font-size: ${({ theme }) => theme.fontSizes.XS};
   width: 48px;
   height: 24px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export default DayNames;

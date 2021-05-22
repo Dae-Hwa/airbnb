@@ -36,13 +36,7 @@ const Calendar = (props) => {
   );
 };
 
-const CalendarContainer = styled.div`
-  width: 916px;
-  height: fit-content;
-  border-radius: ${({ theme }) => theme.borders.L};
-  box-shadow: ${({ theme }) => theme.boxShadow.up2};
-  padding: 60px;
-`;
+const CalendarContainer = styled.div``;
 
 const CalendarBody = styled.div`
   display: flex;

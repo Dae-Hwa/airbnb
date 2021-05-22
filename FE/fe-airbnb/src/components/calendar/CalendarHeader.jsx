@@ -1,7 +1,5 @@
 import { Flex } from '@chakra-ui/layout';
 import styled from 'styled-components';
-import { ReactComponent as LeftArrowIcon } from '../../icon/chevron-left.svg';
-import { ReactComponent as RightArrowIcon } from '../../icon/chevron-right.svg';
 
 const CalendarHeader = ({ calendar, setCalendar }) => {
   function currYear() {
@@ -12,29 +10,11 @@ const CalendarHeader = ({ calendar, setCalendar }) => {
     return calendar.format('MM');
   }
 
-  function prevMonth() {
-    return calendar.clone().subtract(1, 'month');
-  }
-
-  function nextMonth() {
-    return calendar.clone().add(1, 'month');
-  }
-
   return (
     <Flex>
-      <LeftArrowIcon
-        onClick={() => {
-          setCalendar(prevMonth());
-        }}
-      />
       <Title>
         {currYear()}년 {currMonthName()}월
       </Title>
-      <RightArrowIcon
-        onClick={() => {
-          setCalendar(nextMonth());
-        }}
-      />
     </Flex>
   );
 };
@@ -45,7 +25,7 @@ const Title = styled.div`
   justify-content: center;
   font-size: ${({ theme }) => theme.fontSizes.SM};
   font-weight: bold;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 `;
 
 export default CalendarHeader;
