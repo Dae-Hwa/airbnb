@@ -9,15 +9,22 @@ import CalendarList from './CalendarList';
 export const CalendarContext = createContext();
 
 const CalendarModal = (props) => {
+  const initialCalendars = [
+    moment().add(-1, 'M'),
+    moment(),
+    moment().add(1, 'M'),
+    moment().add(2, 'M'),
+  ];
+
   const [calendarMatrix, setCalendarMatrix] = useState([]);
-  const [calendar, setCalendar] = useState(moment()); // value
+  const [calendars, setCalendars] = useState(initialCalendars);
 
   const calendarState = {
     values: {
       calendarMatrix,
       setCalendarMatrix,
-      calendar,
-      setCalendar,
+      calendars,
+      setCalendars,
     },
   };
 
@@ -65,6 +72,7 @@ const CalendarModalContainer = styled.div`
   box-shadow: ${({ theme }) => theme.boxShadow.up2};
   padding: 60px 88px;
   position: relative;
+  margin: 16px auto;
 `;
 
 const Controller = styled.div`
@@ -75,7 +83,7 @@ const Controller = styled.div`
 
 const ViewArea = styled.div`
   width: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
 `;
 
 export default CalendarModal;
