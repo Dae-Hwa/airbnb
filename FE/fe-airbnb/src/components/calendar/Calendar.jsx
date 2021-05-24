@@ -19,7 +19,7 @@ const Calendar = ({ calendar }) => {
         {calendarMatrix.map((week) => (
           <Week>
             {week.map((day) => (
-              <Day>{day.format('D').toString()}</Day>
+              <Day>{day && day.format('D').toString()}</Day>
             ))}
           </Week>
         ))}
