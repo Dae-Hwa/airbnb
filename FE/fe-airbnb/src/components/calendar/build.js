@@ -1,6 +1,6 @@
-export default function buildCalendar(value) {
-  const startDay = value.clone().startOf('month').startOf('week');
-  const endDay = value.clone().endOf('month');
+export default function getCalendarMatrix(momentObj) {
+  const startDay = momentObj.clone().startOf('month').startOf('week');
+  const endDay = momentObj.clone().endOf('month');
   const day = startDay.clone().subtract(1, 'day');
   const calendarMatrix = [];
   while (day.isBefore(endDay, 'day')) {

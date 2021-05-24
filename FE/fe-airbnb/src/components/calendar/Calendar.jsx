@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import CalendarHeader from './CalendarHeader';
 import DayNames from './DayNames';
-import buildCalendar from './build';
+import getCalendarMatrix from './build';
 
 const Calendar = ({ calendar }) => {
   const [calendarMatrix, setCalendarMatrix] = useState([]);
 
   useEffect(() => {
-    setCalendarMatrix(buildCalendar(calendar));
+    setCalendarMatrix(getCalendarMatrix(calendar));
   }, [calendar]);
 
   return (
