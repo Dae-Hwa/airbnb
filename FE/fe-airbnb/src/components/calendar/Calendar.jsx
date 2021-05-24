@@ -1,17 +1,14 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { CalendarContext } from './CalendarModal';
 import CalendarHeader from './CalendarHeader';
 import DayNames from './DayNames';
 import buildCalendar from './build';
 
 const Calendar = ({ calendar }) => {
-  // const { calendarMatrix, setCalendarMatrix } = useContext(CalendarContext);
-
-  const [tempMatrix, setTempMatrix] = useState([]);
+  const [calendarMatrix, setCalendarMatrix] = useState([]);
 
   useEffect(() => {
-    setTempMatrix(buildCalendar(calendar));
+    setCalendarMatrix(buildCalendar(calendar));
   }, [calendar]);
 
   return (
@@ -19,7 +16,7 @@ const Calendar = ({ calendar }) => {
       <CalendarHeader calendar={calendar} />
       <CalendarBody>
         <DayNames />
-        {tempMatrix.map((week) => (
+        {calendarMatrix.map((week) => (
           <Week>
             {week.map((day) => (
               <Day>{day.format('D').toString()}</Day>

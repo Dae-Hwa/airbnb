@@ -16,13 +16,10 @@ const CalendarModal = (props) => {
     moment().add(2, 'M'),
   ];
 
-  const [calendarMatrix, setCalendarMatrix] = useState([]);
   const [calendars, setCalendars] = useState(initialCalendars);
 
   const calendarState = {
     values: {
-      calendarMatrix,
-      setCalendarMatrix,
       calendars,
       setCalendars,
     },
