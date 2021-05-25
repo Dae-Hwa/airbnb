@@ -1,4 +1,4 @@
-import { useState, createContext } from 'react';
+import { useState, createContext, useEffect } from 'react';
 import moment from 'moment';
 import styled from 'styled-components';
 import { Flex, Spacer } from '@chakra-ui/layout';
@@ -16,6 +16,8 @@ const CalendarModal = (props) => {
     moment().add(2, 'M'),
   ];
 
+  const gap = 68;
+  const calendarWidth = 336;
   const [calendars, setCalendars] = useState(initialCalendars);
 
   const calendarState = {
@@ -25,38 +27,57 @@ const CalendarModal = (props) => {
     },
   };
 
-  // function prevMonth() {
-  //   return calendar.clone().subtract(1, 'month');
-  // }
+  const [x, setX] = useState(-(calendarWidth + gap));
+  const [leftSlide, setLeftSlide] = useState(false);
+  const [rightSlide, setRightSlide] = useState(false);
 
-  // function nextMonth() {
-  //   return calendar.clone().add(1, 'month');
-  // }
+  const handleClickLeft = () => {
+    setLeftSlide(true);
+    setX(x + 336 + gap);
+    console.log('왼쪽 클릭');
+  };
+
+  const handleClickRight = () => {
+    setRightSlide(true);
+    setX(x - 336 - gap);
+    console.log('오른쪽 클릭');
+  };
+
+  const handleTransitionEnd = () => {
+    console.log('트랜지션 끝');
+    if (leftSlide) {
+      setLeftSlide(false);
+      setX(x - 336 - gap);
+      setCalendars(calendars.map((cal) => cal.clone().add(-1, 'M')));
+    }
+    if (rightSlide) {
+      setRightSlide(false);
+      setX(x + 336 + gap);
+      setCalendars(calendars.map((cal) => cal.clone().add(1, 'M')));
+    }
+  };
 
   return (
     <CalendarContext.Provider value={calendarState.values}>
       <CalendarModalContainer>
+        <ViewArea>
+          <CalendarList
+            x={x}
+            onTransitionEnd={handleTransitionEnd}
+            leftSlide={leftSlide}
+            rightSlide={rightSlide}
+          />
+        </ViewArea>
+
         <Flex justify="center">
           <Controller>
             <Flex>
-              <LeftArrowIcon
-              // onClick={() => {
-              //   setCalendar(prevMonth());
-              // }}
-              />
+              <LeftArrowIcon onClick={handleClickLeft} />
               <Spacer />
-              <RightArrowIcon
-              // onClick={() => {
-              //   setCalendar(nextMonth());
-              // }}
-              />
+              <RightArrowIcon onClick={handleClickRight} />
             </Flex>
           </Controller>
         </Flex>
-
-        <ViewArea>
-          <CalendarList />
-        </ViewArea>
       </CalendarModalContainer>
     </CalendarContext.Provider>
   );
