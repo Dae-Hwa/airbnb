@@ -39,7 +39,6 @@ const CalendarContainer = styled.table``;
 const CalendarBody = styled.tbody`
   display: flex;
   flex-direction: column;
-
   flex-wrap: wrap;
   gap: 4px 0px;
 `;
@@ -56,6 +55,12 @@ const Day = styled.td`
   height: 48px;
   font-weight: bold;
   font-size: ${({ theme }) => theme.fontSizes.XS};
+
+  &:hover {
+    border: 1px solid ${({ theme }) => theme.colors.black};
+    border-radius: ${({ theme }) => theme.borders.M};
+    cursor: pointer;
+  }
 `;
 
 export default Calendar;
