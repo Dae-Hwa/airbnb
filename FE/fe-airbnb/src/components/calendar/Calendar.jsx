@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import CalendarHeader from './CalendarHeader';
 import DayNames from './DayNames';
 import getCalendarMatrix from './build';
+import Day from './Day';
 
 const Calendar = ({ calendar }) => {
   const [calendarMatrix, setCalendarMatrix] = useState([]);
@@ -18,15 +19,9 @@ const Calendar = ({ calendar }) => {
         <DayNames />
         {calendarMatrix.map((week, i) => (
           <Week key={i}>
-            {week.map((day, i) =>
-              day ? (
-                <Day key={day.format('YYYY-MM-DD')}>
-                  {day && day.format('D').toString()}
-                </Day>
-              ) : (
-                <Day key={i}></Day>
-              )
-            )}
+            {week.map((day, i) => (
+              <Day key={day && day.format('YYYY-MM-DD')} day={day} />
+            ))}
           </Week>
         ))}
       </CalendarBody>
@@ -45,22 +40,6 @@ const CalendarBody = styled.tbody`
 
 const Week = styled.tr`
   display: flex;
-`;
-
-const Day = styled.td`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  font-weight: bold;
-  font-size: ${({ theme }) => theme.fontSizes.XS};
-
-  &:hover {
-    border: 1px solid ${({ theme }) => theme.colors.black};
-    border-radius: ${({ theme }) => theme.borders.M};
-    cursor: pointer;
-  }
 `;
 
 export default Calendar;
