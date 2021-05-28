@@ -1,9 +1,9 @@
-import { Dispatch, ReactElement, SetStateAction, useContext } from 'react';
+import { ReactElement, useContext } from 'react';
 
 import styled from 'styled-components'
 import { Moment } from 'moment';
 
-import { CalendarContextRaccoon } from '@components/searchBar/SearchBar'
+import { CalendarContext } from '@components/searchBar/SearchBar'
 import { CalendarContextType } from '@components/searchBar/SearchBar'
 
 type DayProps = {
@@ -12,7 +12,7 @@ type DayProps = {
 }
 
 function useCalendarState(): CalendarContextType {
-  const state = useContext(CalendarContextRaccoon);
+  const state = useContext(CalendarContext);
   if(!state) throw new Error('에러발생~! state가 없습니다.🙅🏻');
   return state;
 }
