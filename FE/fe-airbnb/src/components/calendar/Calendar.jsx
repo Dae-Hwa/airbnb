@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import CalendarHeader from './CalendarHeader';
 import DayNames from './DayNames';
@@ -20,7 +20,7 @@ const Calendar = ({ calendar }) => {
         {calendarMatrix.map((week, i) => (
           <Week key={i}>
             {week.map((day, i) => (
-              <Day key={day && day.format('YYYY-MM-DD')} day={day} />
+              <Day key={day ? day.format('YYYY-MM-DD') : i} day={day} />
             ))}
           </Week>
         ))}
@@ -29,16 +29,16 @@ const Calendar = ({ calendar }) => {
   );
 };
 
-const CalendarContainer = styled.table``;
+const CalendarContainer = styled.div``;
 
-const CalendarBody = styled.tbody`
+const CalendarBody = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   gap: 4px 0px;
 `;
 
-const Week = styled.tr`
+const Week = styled.div`
   display: flex;
 `;
 

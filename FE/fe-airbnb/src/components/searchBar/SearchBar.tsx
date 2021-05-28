@@ -1,5 +1,6 @@
-import { ReactElement, useState } from 'react';
+import { createContext, Dispatch, ReactElement, SetStateAction, useState } from 'react';
 import styled from 'styled-components';
+import { Moment } from 'moment';
 import { Center, Flex } from '@chakra-ui/layout';
 
 import CalendarModal from '@components/calendar/CalendarModal';
@@ -9,14 +10,27 @@ import SearchButton from '../SearchButton';
 import SearchBarBtn from './SearchBarBtn';
 import { SearchBarBtnType, SelectedContentProps } from './searchBarTypes';
 
+
+export type CalendarContextType = {
+  checkInMoment: Moment | null;
+  setCheckInMoment: Dispatch<SetStateAction<Moment | null>>;
+  checkOutMoment: Moment | null;
+  setCheckOutMoment: Dispatch<SetStateAction<Moment | null>>;
+}
+
 function SearchBar() {
   const [selectedBtn, setSelectedBtn] = useState<string | null>(null);
+
+  const [checkInMoment, setCheckInMoment] = useState<Moment | null>(null);
+  const [checkOutMoment, setCheckOutMoment] = useState<Moment | null>(null);
 
   const renderModal = (): ReactElement | void => {
     switch (selectedBtn) {
       case SearchBarBtnType.CHECK_IN_OUT:
         return (
-          <CalendarModal />
+          <CalendarContextRaccoon.Provider value={{checkInMoment, setCheckInMoment, checkOutMoment, setCheckOutMoment}}>
+            <CalendarModal />
+          </CalendarContextRaccoon.Provider>
         );
 
       case SearchBarBtnType.PRICE:
@@ -116,5 +130,7 @@ const SearchButtonContainer = styled.div`
   top: 18px;
   right: 18px;
 `
+
+export const CalendarContextRaccoon = createContext<CalendarContextType | null >(null);
 
 export default SearchBar;
