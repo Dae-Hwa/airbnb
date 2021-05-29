@@ -7,3 +7,8 @@ export enum SearchBarBtnType {
 export type SelectedContentProps = {
   contentType: string
 }
+
+export type DayContainerProps = {
+  isSelected: boolean,
+  isBetween: boolean
+}
