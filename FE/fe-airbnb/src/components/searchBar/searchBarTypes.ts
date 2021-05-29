@@ -10,5 +10,6 @@ export type SelectedContentProps = {
 
 export type DayContainerProps = {
   isSelected: boolean,
-  isBetween: boolean
+  isBetween: boolean,
+  disabled: boolean
 }

@@ -1,7 +1,7 @@
 import { ReactElement, useContext } from 'react';
 
 import styled from 'styled-components'
-import { Moment } from 'moment';
+import moment, { Moment } from 'moment';
 
 import { CalendarContext } from '@components/searchBar/SearchBar'
 import { CalendarContextType } from '@components/searchBar/SearchBar'
@@ -33,6 +33,11 @@ function Day({ day }: DayProps): ReactElement {
 
   const isBetween = () => {
     return (day.isBetween(checkInMoment, checkOutMoment))
+  }
+
+  const isBefore = () => {
+    if(day.isSame(moment().startOf('day'))) return false;
+    else return day.isBefore(moment());
   }
 
   const handleClickDate = (): void => {
@@ -69,7 +74,7 @@ function Day({ day }: DayProps): ReactElement {
   return (
     <>
       {day !== null
-        ? <DayContainer onClick={handleClickDate} isSelected={isSelected()} isBetween={isBetween()}>
+        ? <DayContainer disabled={isBefore()} onClick={handleClickDate} isSelected={isSelected()} isBetween={isBetween()}>
             {day && day.format('D').toString()}
           </DayContainer>
         : <Blank />}
@@ -77,7 +82,7 @@ function Day({ day }: DayProps): ReactElement {
   )
 }
 
-const DayContainer = styled.div<DayContainerProps>`
+const DayContainer = styled.button<DayContainerProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -89,11 +94,20 @@ const DayContainer = styled.div<DayContainerProps>`
   color: ${({ theme, isSelected }) => isSelected ? theme.colors.white : theme.colors.gray1};
   border-radius: ${({ theme, isBetween }) => isBetween ? 0 : theme.borders.M};
 
+  &:disabled:hover {
+    cursor: default;
+    border: none;
+  }
   &:hover {
     border: 1px solid ${({ theme }) => theme.colors.black};
     border-radius: ${({ theme }) => theme.borders.M};
     cursor: pointer;
   }
+
+  &:disabled {
+    color: ${({theme}) => theme.colors.gray4};
+  }
+  
 `
 
 const Blank = styled.div`
