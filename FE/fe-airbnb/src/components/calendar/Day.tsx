@@ -18,12 +18,42 @@ function useCalendarState(): CalendarContextType {
 }
 
 function Day({ day }: DayProps): ReactElement {
-  const state = useCalendarState();
-  const { setCheckInMoment } = state;
+  const {
+    checkInMoment, 
+    setCheckInMoment, 
+    checkOutMoment, 
+    setCheckOutMoment 
+  } = useCalendarState();
 
-  const handleClickDate = ({ target }: any): void => {
-    console.log(target);
-    console.dir(setCheckInMoment);
+  const handleClickDate = (): void => {
+    if(!checkInMoment && !checkOutMoment) {
+      setCheckInMoment(day);
+    }
+
+    if(checkInMoment && !checkOutMoment) {
+      if(day.isSame(checkInMoment)) {
+        setCheckOutMoment(day);
+      }
+      if(day.isBefore(checkInMoment)) {
+        setCheckInMoment(day);
+      }
+      if(day.isAfter(checkInMoment)) {
+        setCheckOutMoment(day);
+      }
+    }
+
+    if(checkInMoment && checkOutMoment) {
+      if(day.isSame(checkInMoment)) {
+        setCheckOutMoment(day);
+      }
+      if(day.isBefore(checkInMoment)) {
+        setCheckInMoment(day);
+        setCheckOutMoment(null);
+      }
+      if(day.isAfter(checkInMoment)) {
+        setCheckOutMoment(day)
+      }
+    }
   };
 
   return (

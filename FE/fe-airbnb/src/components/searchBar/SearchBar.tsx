@@ -1,4 +1,4 @@
-import { createContext, Dispatch, ReactElement, SetStateAction, useState } from 'react';
+import { createContext, Dispatch, ReactElement, SetStateAction, useRef, useState } from 'react';
 import styled from 'styled-components';
 import moment, { Moment } from 'moment';
 import { Center, Flex } from '@chakra-ui/layout';
@@ -9,7 +9,6 @@ import PriceModal from '@components/price/PriceModal';
 import SearchButton from '../SearchButton';
 import SearchBarBtn from './SearchBarBtn';
 import { SearchBarBtnType, SelectedContentProps } from './searchBarTypes';
-
 
 export type CalendarContextType = {
   calendars: Moment[];
@@ -36,7 +35,6 @@ function SearchBar() {
   const [checkInMoment, setCheckInMoment] = useState<Moment | null>(null);
   const [checkOutMoment, setCheckOutMoment] = useState<Moment | null>(null);
 
-
   const calendarState = {
     values: {
       calendars,
@@ -47,7 +45,6 @@ function SearchBar() {
       setCheckOutMoment
     },
   };
-
 
   const renderModal = (): ReactElement | void => {
     switch (selectedBtn) {
@@ -83,12 +80,20 @@ function SearchBar() {
             <CheckInOut>
               <Flex direction="column">
                 <SearchBarSubTitle>체크인</SearchBarSubTitle>
-                <SelectedContent contentType="placeholder">날짜 입력</SelectedContent>
+                {
+                  checkInMoment 
+                    ? <SelectedContent contentType="date">{checkInMoment.format('YYYY-MM-DD')}</SelectedContent> 
+                    : <SelectedContent contentType="placeholder">날짜 입력</SelectedContent>
+                }
               </Flex>
               <CustomSpacer />
               <Flex direction="column">
                 <SearchBarSubTitle>체크아웃</SearchBarSubTitle>
-                <SelectedContent contentType="placeholder">날짜 입력</SelectedContent>
+                {
+                  checkOutMoment 
+                    ? <SelectedContent contentType="date">{checkOutMoment.format('YYYY-MM-DD')}</SelectedContent> 
+                    : <SelectedContent contentType="placeholder">날짜 입력</SelectedContent>
+                }
               </Flex>
             </CheckInOut>
           </SearchBarBtn>
