@@ -3,5 +3,7 @@ export type PlusButtonProps = {
 };
 
 export type HeadCountProps = {
-  guestType: string;
+  guestType: GuestType;
 }
+
+export type GuestType = 'adults' | 'children' | 'infants';

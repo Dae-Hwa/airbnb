@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import HeadCount from "@components/headcount/HeadCount"
+import { GuestType } from './HeadCountTypes';
 
 function HeadCountModal() {
-  const guestTypes: string[] = ['adults', 'children', 'infants'];
+  const guestTypes: GuestType[] = ['adults', 'children', 'infants'];
 
   return (
     <HeadCountModalContainer>
