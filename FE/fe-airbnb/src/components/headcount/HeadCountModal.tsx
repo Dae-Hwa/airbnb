@@ -12,7 +12,7 @@ function HeadCountModal() {
   );
 }
 
-const HeadCountModalContainer = styled.div`
+const HeadCountModalContainer = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 42px;

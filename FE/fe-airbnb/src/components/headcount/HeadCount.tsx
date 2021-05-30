@@ -27,7 +27,7 @@ function HeadCount({ guestType }: HeadCountProps) {
   )
 }
 
-const HeadCountContainer = styled.div`
+const HeadCountContainer = styled.li`
   display: flex;
   justify-content: space-between;
 `
