@@ -8,21 +8,15 @@ import HeadCountModal from '@components/headcount/HeadCountModal';
 import PriceModal from '@components/price/PriceModal';
 import SearchButton from '../SearchButton';
 import SearchBarBtn from './SearchBarBtn';
-import { SearchBarBtnType, SelectedContentProps } from './searchBarTypes';
-
-export type CalendarContextType = {
-  calendars: Moment[];
-  setCalendars: Dispatch<SetStateAction<Moment[]>>;
-  checkInMoment: Moment | null;
-  setCheckInMoment: Dispatch<SetStateAction<Moment | null>>;
-  checkOutMoment: Moment | null;
-  setCheckOutMoment: Dispatch<SetStateAction<Moment | null>>;
-}
+import { CalendarContextType, HeadCountContextType, SearchBarBtnType, SelectedContentProps } from './searchBarTypes';
 
 export const CalendarContext = createContext<CalendarContextType | null >(null);
+export const HeadCountContext = createContext<HeadCountContextType | null>(null);
 
 function SearchBar() {
   const [selectedBtn, setSelectedBtn] = useState<string | null>(null);
+
+  // ============================ calendar 상태 ============================
 
   const initialCalendars = [
     moment().add(-1, 'M'),
@@ -46,6 +40,23 @@ function SearchBar() {
     },
   };
 
+  // ============================ headcount 상태 ============================
+
+  const [adultsCount, setAdultsCount] = useState(0);
+  const [childrenCount, setChildrenCount] = useState(0);
+  const [infantsCount, setInfantsCount] = useState(0);
+
+  const headCountState = {
+    values: {
+      adultsCount,
+      setAdultsCount,
+      childrenCount,
+      setChildrenCount,
+      infantsCount,
+      setInfantsCount
+    }
+  }
+
   const renderModal = (): ReactElement | void => {
     switch (selectedBtn) {
       case SearchBarBtnType.CHECK_IN_OUT:
@@ -62,7 +73,9 @@ function SearchBar() {
 
       case SearchBarBtnType.HEAD_COUNT:
         return (
-          <HeadCountModal />
+          <HeadCountContext.Provider value={headCountState.values}>
+            <HeadCountModal />
+          </HeadCountContext.Provider>
         );
     }
   }
