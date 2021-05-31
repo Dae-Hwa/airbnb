@@ -11,7 +11,7 @@ import SearchBarBtn from './SearchBarBtn';
 import { CalendarContextType, HeadCountContextType, SearchBarBtnType, SelectedContentProps } from './searchBarTypes';
 
 export const CalendarContext = createContext<CalendarContextType | null >(null);
-export const HeadCountContext = createContext<HeadCountContextType | null>(null);
+export const HeadCountContext = createContext<HeadCountContextType>({guestCountState: null, setGuestCountState: null});
 
 function SearchBar() {
   const [selectedBtn, setSelectedBtn] = useState<string | null>(null);

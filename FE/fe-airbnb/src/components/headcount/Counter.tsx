@@ -11,16 +11,11 @@ import { HandleCountType, HeadCountProps } from './HeadCountTypes';
 import { HeadCountContext } from '@components/searchBar/SearchBar';
 import { guestCountStateType, HeadCountContextType } from '@components/searchBar/searchBarTypes';
 
-function useHeadCountState(): HeadCountContextType {
-  const state = useContext(HeadCountContext);
-  if(!state) throw new Error('에러발생~! state가 없습니다.🙅🏻');
-  return state;
-}
-
 function Counter({ guestType }: HeadCountProps) {
-  const { guestCountState, setGuestCountState } = useHeadCountState();
+  const { guestCountState, setGuestCountState } = useContext<HeadCountContextType>(HeadCountContext);
 
   const handleCount = ({ guestType, count }: HandleCountType) => {
+    if(setGuestCountState === null) throw Error('setGuestCountState가 null임!');
     setGuestCountState((guestCountState: guestCountStateType) => {
       const checkYoung = guestType === 'children' || guestType === 'infants';
       const checkParents = guestCountState.adults === 0;
@@ -33,7 +28,7 @@ function Counter({ guestType }: HeadCountProps) {
     <Flex align="center">
       <MinusIcon onClick={() => handleCount({ guestType, count: -1 })}/>
       <Count>
-        <Center>{guestCountState[guestType]}</Center>
+        <Center>{guestCountState?.[guestType]}</Center>
       </Count>
       <PlusIcon onClick={() => handleCount({ guestType, count: 1 })}/>
     </Flex>

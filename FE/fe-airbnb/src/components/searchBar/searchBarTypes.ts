@@ -33,10 +33,10 @@ export type guestCountStateType = {
 }
 
 export type HeadCountContextType = {
-  guestCountState: guestCountStateType;
+  guestCountState: guestCountStateType | null,
   setGuestCountState: React.Dispatch<React.SetStateAction<{
     adults: number;
     children: number;
     infants: number;
-  }>>
+  }>> | null
 }
