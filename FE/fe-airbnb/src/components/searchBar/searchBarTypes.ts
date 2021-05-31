@@ -26,11 +26,17 @@ export type CalendarContextType = {
   setCheckOutMoment: Dispatch<SetStateAction<Moment | null>>;
 }
 
+export type guestCountStateType = { 
+  adults: number, 
+  children: number, 
+  infants: number 
+}
+
 export type HeadCountContextType = {
-  adultsCount: number;
-  setAdultsCount: Dispatch<SetStateAction<number>>;
-  childrenCount: number;
-  setChildrenCount: Dispatch<SetStateAction<number>>;
-  infantsCount: number;
-  setInfantsCount: Dispatch<SetStateAction<number>>;
+  guestCountState: guestCountStateType;
+  setGuestCountState: React.Dispatch<React.SetStateAction<{
+    adults: number;
+    children: number;
+    infants: number;
+  }>>
 }

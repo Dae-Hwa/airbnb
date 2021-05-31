@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 
 import { Center, Flex } from '@chakra-ui/layout';
 import styled from 'styled-components';
@@ -7,25 +7,35 @@ import styled from 'styled-components';
 // import MinusButton from '@components/MinusButton';
 import { ReactComponent as PlusIcon } from '../../icon/plus-circle.svg';
 import { ReactComponent as MinusIcon } from '../../icon/minus-circle.svg';
+import { HandleCountType, HeadCountProps } from './HeadCountTypes';
+import { HeadCountContext } from '@components/searchBar/SearchBar';
+import { guestCountStateType, HeadCountContextType } from '@components/searchBar/searchBarTypes';
 
-function Counter() {
-  const [count, setCount] = useState(0);
+function useHeadCountState(): HeadCountContextType {
+  const state = useContext(HeadCountContext);
+  if(!state) throw new Error('에러발생~! state가 없습니다.🙅🏻');
+  return state;
+}
 
-  const handleIncrement = (): void => {
-    setCount(count + 1);
-  }
+function Counter({ guestType }: HeadCountProps) {
+  const { guestCountState, setGuestCountState } = useHeadCountState();
 
-  const handleDecrement = (): void => {
-    count && setCount(count - 1);
+  const handleCount = ({ guestType, count }: HandleCountType) => {
+    setGuestCountState((guestCountState: guestCountStateType) => {
+      const checkYoung = guestType === 'children' || guestType === 'infants';
+      const checkParents = guestCountState.adults === 0;
+      const result = { ...guestCountState, [guestType]: guestCountState[guestType] + count};
+      return (checkYoung && checkParents && count === 1) ? { ...result, adults: 1 } : result;
+    })
   }
 
   return (
     <Flex align="center">
-      <MinusIcon onClick={handleDecrement}/>
+      <MinusIcon onClick={() => handleCount({ guestType, count: -1 })}/>
       <Count>
-        <Center>{count}</Center>
+        <Center>{guestCountState[guestType]}</Center>
       </Count>
-      <PlusIcon onClick={handleIncrement}/>
+      <PlusIcon onClick={() => handleCount({ guestType, count: 1 })}/>
     </Flex>
   )
 }

@@ -7,3 +7,8 @@ export type HeadCountProps = {
 }
 
 export type GuestType = 'adults' | 'children' | 'infants';
+
+export type HandleCountType = {
+  guestType: GuestType;
+  count: number;
+}

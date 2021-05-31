@@ -42,18 +42,12 @@ function SearchBar() {
 
   // ============================ headcount 상태 ============================
 
-  const [adultsCount, setAdultsCount] = useState(0);
-  const [childrenCount, setChildrenCount] = useState(0);
-  const [infantsCount, setInfantsCount] = useState(0);
-
+  const [guestCountState, setGuestCountState] = useState({ adults: 0, children: 0, infants: 0 });
+  const { adults, children, infants } = guestCountState;
   const headCountState = {
     values: {
-      adultsCount,
-      setAdultsCount,
-      childrenCount,
-      setChildrenCount,
-      infantsCount,
-      setInfantsCount
+      guestCountState,
+      setGuestCountState
     }
   }
 
@@ -121,7 +115,11 @@ function SearchBar() {
           <SearchBarBtn onClick={() => handleClickSearchBarBtn(SearchBarBtnType.HEAD_COUNT)}>
             <Flex direction="column">
               <SearchBarSubTitle>인원</SearchBarSubTitle>
-              <SelectedContent contentType="placeholder">게스트 추가</SelectedContent>
+              {
+                guestCountState.adults || guestCountState.children || guestCountState.infants
+                  ? <SelectedContent contentType="guests">게스트 {adults + children}명, 유아 {infants}명</SelectedContent>
+                  : <SelectedContent contentType="placeholder">게스트 추가</SelectedContent>
+              }
             </Flex>
           </SearchBarBtn>
 

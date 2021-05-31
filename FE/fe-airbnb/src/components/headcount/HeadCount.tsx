@@ -18,12 +18,12 @@ function HeadCount({ guestType }: HeadCountProps) {
 
   return (
     <HeadCountContainer>
-        <GuestTypeContainer>
-          <GuestTypeTitle>{guestTypeTitle}</GuestTypeTitle>
-          <GuestTypeCaption>{guestTypeCaption}</GuestTypeCaption>
-        </GuestTypeContainer>
-        <Counter />
-      </HeadCountContainer>
+      <GuestTypeContainer>
+        <GuestTypeTitle>{guestTypeTitle}</GuestTypeTitle>
+        <GuestTypeCaption>{guestTypeCaption}</GuestTypeCaption>
+      </GuestTypeContainer>
+      <Counter guestType={guestType}/>
+    </HeadCountContainer>
   )
 }
 
