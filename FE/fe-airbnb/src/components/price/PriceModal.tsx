@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PriceChart from './PriceChart';
+import RangeSlider from './RangeSlider';
 
 const PRICE_DATA = {
   WIDTH: 365,
@@ -10,12 +11,15 @@ const PRICE_DATA = {
 }
 
 function PriceModal() {
+  const [min, max] = [10000, 1000000];
+
   return (
     <PriceModalContainer>
       <PriceRangeTitle>가격 범위</PriceRangeTitle>
       <PriceRange>₩11,000 - ₩1,000,000+</PriceRange>
       <PriceAverage>평균 1박 요금은 ₩165,556 입니다.</PriceAverage>
       <PriceChart />
+      <RangeSlider min={min} max={max}/>
     </PriceModalContainer>
   );
 }

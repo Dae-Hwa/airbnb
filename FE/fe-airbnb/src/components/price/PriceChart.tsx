@@ -12,7 +12,7 @@ function PriceChart() {
 const PriceChartCanvas = styled.canvas`
   width: 100%;
   height: 100px;
-  background-color: lightyellow;
+  background-color: #c91664;
 `
 
 export default PriceChart
