@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { PriceContext } from '@components/searchBar/SearchBar';
+import { PriceContextType } from '@components/searchBar/searchBarTypes';
+import { useContext, useState } from 'react';
 import styled from 'styled-components';
 import PriceChart from './PriceChart';
 import RangeSlider from './RangeSlider';
@@ -11,10 +13,20 @@ const PRICE_DATA = {
   INITIAL_RIGHT: 1350,
 }
 
+function usePriceState(): PriceContextType {
+  const state = useContext(PriceContext);
+  if(!state) throw new Error('에러발생~! state가 없습니다.🙅🏻');
+  return state;
+}
+
 function PriceModal() {
-  const [min, max] = [10000, 1000000];
-  const [minPrice, setMinPrice] = useState(min);
-  const [maxPrice, setMaxPrice] = useState(max);
+  const { 
+    min,
+    max,
+    minPrice,
+    setMinPrice,
+    maxPrice,
+    setMaxPrice } = usePriceState();
 
   return (
     <PriceModalContainer>
