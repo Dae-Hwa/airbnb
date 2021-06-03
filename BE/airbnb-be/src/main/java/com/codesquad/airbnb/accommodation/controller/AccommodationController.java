@@ -2,6 +2,7 @@ package com.codesquad.airbnb.accommodation.controller;
 
 import com.codesquad.airbnb.accommodation.service.AccommodationService;
 import com.codesquad.airbnb.common.dummydata.AccommodationPriceStatsDummyDataFactory;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class AccommodationController {
 
     private AccommodationService accommodationService;
