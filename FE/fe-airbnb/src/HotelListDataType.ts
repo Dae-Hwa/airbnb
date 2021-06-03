@@ -17,6 +17,7 @@ export type HotelDataType = {
   id: number,
   name: string,
   accommodationOption: accommodationOptionType,
+  pricePerNight: number,
   totalPrice: number,
   reviewRating: number,
   reviewCounts: number,

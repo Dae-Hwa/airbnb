@@ -11,11 +11,8 @@ import {
   PriceContext,
 } from './searchBar/SearchBar';
 import { HotelListContext } from '../App';
-import { hotelListMockData } from '../mockData';
 
 const SearchButton = ({ size }) => {
-  // checkinDate, checkoutDate, startPrice, endPrice, numberOfPeople 필요
-
   const { checkInMoment, checkOutMoment } = useContext(CalendarContext);
   const { minPrice, maxPrice } = useContext(PriceContext);
   const { guestCountState } = useContext(HeadCountContext);
@@ -25,20 +22,22 @@ const SearchButton = ({ size }) => {
   const checkoutDate = checkOutMoment?.format('YYYY-MM-DD');
   const startPrice = minPrice;
   const endPrice = maxPrice;
-  const numberOfPeople = adults + children + infants;
+  const numberOfAdults = adults;
+  const numberOfChildren = children;
+  const numberOfBabies = infants;
 
-  const { hotelListData, setHotelListData } = useContext(HotelListContext);
+  const { setHotelListData } = useContext(HotelListContext);
 
   const history = useHistory();
   const routeToReservationPage = () => {
     history.push('/reservation');
   };
 
-  const handleClickSearchBtn = () => {
-    // const { data } = axios.get(
-    //   `http://airbnb-team4-mockup.herokuapp.com/accommodations?checkinDate=2021-06-03&checkoutDate=2021-06-03&startPrice=0&endPrice=0&numberOfPeople=0`
-    // );
-    const data = hotelListMockData;
+  const handleClickSearchBtn = async () => {
+    const { data } = await axios.get(
+      `http://airbnb-team4-mockup.herokuapp.com/accommodations?checkinDate=${checkinDate}&checkoutDate=${checkoutDate}&startPrice=${startPrice}&endPrice=${endPrice}&numberOfAdults=${numberOfAdults}&numberOfChildren=${numberOfChildren}&numberOfBabies=${numberOfBabies}`
+    );
+
     setHotelListData(data);
     routeToReservationPage();
   };
