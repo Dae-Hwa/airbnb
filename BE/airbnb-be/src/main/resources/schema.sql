@@ -1,7 +1,7 @@
 -- -----------------------------------------------------
 -- Table `airbnb`.`image`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `airbnb`.`image`;
+DROP TABLE IF EXISTS `airbnb`.`image` CASCADE;
 
 CREATE TABLE IF NOT EXISTS `airbnb`.`image` (
     `id`          INT           NOT NULL AUTO_INCREMENT,
@@ -15,7 +15,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `airbnb`.`user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `airbnb`.`user`;
+DROP TABLE IF EXISTS `airbnb`.`user` CASCADE;
 
 CREATE TABLE IF NOT EXISTS `airbnb`.`user` (
     `id`       INT         NOT NULL AUTO_INCREMENT,
@@ -35,7 +35,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `airbnb`.`accommodation`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `airbnb`.`accommodation`;
+DROP TABLE IF EXISTS `airbnb`.`accommodation` CASCADE;
 
 CREATE TABLE IF NOT EXISTS `airbnb`.`accommodation` (
     `id`                         INT         NOT NULL AUTO_INCREMENT,
@@ -70,7 +70,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `airbnb`.`accommodation_has_image`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `airbnb`.`accommodation_has_image`;
+DROP TABLE IF EXISTS `airbnb`.`accommodation_has_image` CASCADE;
 
 CREATE TABLE IF NOT EXISTS `airbnb`.`accommodation_has_image` (
     `accommodation_id` INT     NOT NULL,
@@ -96,7 +96,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `airbnb`.`reservation`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `airbnb`.`reservation`;
+DROP TABLE IF EXISTS `airbnb`.`reservation` CASCADE;
 
 CREATE TABLE IF NOT EXISTS `airbnb`.`reservation` (
     `id`                     INT  NOT NULL AUTO_INCREMENT,
@@ -125,7 +125,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `airbnb`.`review`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `airbnb`.`review`;
+DROP TABLE IF EXISTS `airbnb`.`review` CASCADE;
 
 CREATE TABLE IF NOT EXISTS `airbnb`.`review` (
     `id`               INT         NOT NULL AUTO_INCREMENT,
