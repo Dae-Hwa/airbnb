@@ -3,6 +3,24 @@ package com.codesquad.airbnb.accommodation.domain.price;
 import com.codesquad.airbnb.reservation.domain.ReservationDetail;
 
 public interface PricePolicy {
+    //TODO : Percent VO 만들기
+
+    static PricePolicy weekDayDiscountPolicy(int discountPercent) {
+        return new WeekdayDiscountPolicy(discountPercent);
+    }
+
+    static PricePolicy cleaningFeePolicy(int cleaningFeePercent) {
+        return new CleaningFeePolicy(cleaningFeePercent);
+    }
+
+    static PricePolicy serviceFeePolicy(int serviceFeePercent) {
+        return new ServiceFeePolicy(serviceFeePercent);
+    }
+
+    static PricePolicy accommodationTaxPolicy(int accommodationTaxPercent) {
+        return new AccommodationTaxPolicy(accommodationTaxPercent);
+    }
+
     default boolean isDiscount() {
         return false;
     }
@@ -11,7 +29,7 @@ public interface PricePolicy {
         return false;
     }
 
-    default boolean getServiceFeePercent() {
+    default boolean isServiceFee() {
         return false;
     }
 

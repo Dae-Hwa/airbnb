@@ -16,6 +16,10 @@ public class AccommodationHost {
         this.image = image;
     }
 
+    public static AccommodationHostBuilder builder() {
+        return AccommodationHostBuilder.anAccommodationHost();
+    }
+
     public Long getId() {
         return id;
     }

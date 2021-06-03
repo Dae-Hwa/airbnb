@@ -7,7 +7,7 @@ public class AccommodationTaxPolicy implements PricePolicy {
 
     private int accommodationTaxPercent;
 
-    public AccommodationTaxPolicy(int accommodationTaxPercent) {
+    protected AccommodationTaxPolicy(int accommodationTaxPercent) {
         this.accommodationTaxPercent = accommodationTaxPercent;
     }
 

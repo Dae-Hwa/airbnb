@@ -7,7 +7,7 @@ public class ServiceFeePolicy implements PricePolicy {
 
     private int serviceFeePercent;
 
-    public ServiceFeePolicy(int serviceFeePercent) {
+    protected ServiceFeePolicy(int serviceFeePercent) {
         this.serviceFeePercent = serviceFeePercent;
     }
 
@@ -16,7 +16,7 @@ public class ServiceFeePolicy implements PricePolicy {
     }
 
     @Override
-    public boolean getServiceFeePercent() {
+    public boolean isServiceFee() {
         return true;
     }
 

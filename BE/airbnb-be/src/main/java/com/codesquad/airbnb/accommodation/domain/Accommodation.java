@@ -16,9 +16,9 @@ public class Accommodation {
     private List<String> images;
     private String description;
     private AccommodationHost accommodationHost;
-    private Price price;
+    private Price accommodationPrice;
 
-    protected Accommodation(Long id, String name, AccommodationOption accommodationOption, double reviewRating, int reviewCounts, String mainImage, List<String> images, String description, AccommodationHost accommodationHost, Price price) {
+    protected Accommodation(Long id, String name, AccommodationOption accommodationOption, double reviewRating, int reviewCounts, String mainImage, List<String> images, String description, AccommodationHost accommodationHost, Price accommodationPrice) {
         this.id = id;
         this.name = name;
         this.accommodationOption = accommodationOption;
@@ -28,7 +28,7 @@ public class Accommodation {
         this.images = images;
         this.description = description;
         this.accommodationHost = accommodationHost;
-        this.price = price;
+        this.accommodationPrice = accommodationPrice;
     }
 
     public static AccommodationBuilder builder() {
@@ -36,35 +36,39 @@ public class Accommodation {
     }
 
     public int pricePerNight() {
-        return price.pricePerNight();
+        return accommodationPrice.pricePerNight();
     }
 
     public int priceForNights(ReservationDetail reservationDetail) {
-        return price.priceForNights(reservationDetail);
+        return accommodationPrice.priceForNights(reservationDetail);
     }
 
     public int discountPrice(ReservationDetail reservationDetail) {
-        return price.discountPrice(reservationDetail);
+        return accommodationPrice.discountPrice(reservationDetail);
     }
 
     public int cleaningFee(ReservationDetail reservationDetail) {
-        return price.cleaningFee(reservationDetail);
+        return accommodationPrice.cleaningFee(reservationDetail);
     }
 
     public int serviceFee(ReservationDetail reservationDetail) {
-        return price.serviceFee(reservationDetail);
+        return accommodationPrice.serviceFee(reservationDetail);
     }
 
     public int accommodationTax(ReservationDetail reservationDetail) {
-        return price.accommodationTax(reservationDetail);
+        return accommodationPrice.accommodationTax(reservationDetail);
     }
 
     public int totalPrice(ReservationDetail reservationDetail) {
-        return price.totalPrice(reservationDetail);
+        return accommodationPrice.totalPrice(reservationDetail);
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -97,5 +101,9 @@ public class Accommodation {
 
     public AccommodationHost getAccommodationHost() {
         return accommodationHost;
+    }
+
+    public Price getAccommodationPrice() {
+        return accommodationPrice;
     }
 }

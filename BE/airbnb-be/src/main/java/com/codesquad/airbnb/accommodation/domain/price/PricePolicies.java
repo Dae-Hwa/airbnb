@@ -13,7 +13,11 @@ public class PricePolicies {
         this.pricePolicies = pricePolicies;
     }
 
-    static PricePolicies defaultPolicies() {
+    public static PricePolicies from(List<PricePolicy> pricePolicies) {
+        return new PricePolicies(pricePolicies);
+    }
+
+    protected static PricePolicies defaultPolicies() {
         return new PricePolicies(Arrays.asList(
                 DiscountPolicy.defaultDiscountPolicy(),
                 CleaningFeePolicy.defaultCleaningFeePolicy(),
@@ -44,7 +48,7 @@ public class PricePolicies {
 
     public int serviceFee(ReservationDetail reservationDetail, int pricePerNights) {
         for (PricePolicy each : pricePolicies) {
-            if (each.getServiceFeePercent()) {
+            if (each.isServiceFee()) {
                 return each.calculate(reservationDetail, pricePerNights);
             }
         }
