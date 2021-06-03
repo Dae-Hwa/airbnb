@@ -23,12 +23,11 @@ final class BudgetViewModel: AnySearchConditionHandleModel<[Budget]> {
         }
     }
     
-    private let conditionManager: ConditionManager
-    private var budgetManager: BudgetManager?
-    
-    init(conditionManager: ConditionManager) {
-        self.conditionManager = conditionManager
+    enum ButtonTitle {
+        static let back = "가격 선택"
     }
+    
+    private var budgetManager: BudgetManager?
     
     override func bind(dataHandler: @escaping DataHandler, conditionHandler: @escaping ConditionHandler) {
         super.bind(dataHandler: dataHandler, conditionHandler: conditionHandler)

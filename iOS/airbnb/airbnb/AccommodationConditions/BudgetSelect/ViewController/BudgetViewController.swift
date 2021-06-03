@@ -43,6 +43,9 @@ final class BudgetViewController: AccommodationConditionViewController {
     }()
     
     private lazy var budgetGraphView: BudgetGraphView = {
+        let tempFrame = CGRect(x: 0, y: 0,
+                               width: view.frame.width - viewInset * 2,
+                               height: view.frame.height - tableCellHeight * 4)
         let view = BudgetGraphView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -90,11 +93,6 @@ final class BudgetViewController: AccommodationConditionViewController {
         bind()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        budgetGraphView.configure()
-    }
-    
     private func bind() {
         viewModel?.bind(dataHandler: { [weak self] budgets in
             self?.drawGraph(with: budgets)
@@ -127,7 +125,11 @@ final class BudgetViewController: AccommodationConditionViewController {
     }
     
     @objc override func pushNextViewController(_ sender: UIBarButtonItem) {
-        
+        super.pushNextViewController(sender)
+        let conditionManager = viewModel!.conditionManager
+        let accommodationViewController = AccommodationListViewController.create(conditionManager: conditionManager)
+        self.navigationItem.backButtonTitle = BudgetViewModel.ButtonTitle.back
+        self.navigationController?.pushViewController(accommodationViewController, animated: true)
     }
 
 }

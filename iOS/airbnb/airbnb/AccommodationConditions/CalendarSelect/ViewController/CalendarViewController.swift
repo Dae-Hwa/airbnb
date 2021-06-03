@@ -127,11 +127,11 @@ final class CalendarViewController: AccommodationConditionViewController {
 
     @objc override func pushNextViewController(_ sender: UIBarButtonItem) {
         super.pushNextViewController(sender)
-        let tempLocation = Location(name: "임시", coordinate: Coordinate(latitude: 0, longitude: 0))
-        let tempConditionManager = ConditionManager(location: tempLocation)
-        let viewModel = BudgetViewModel(conditionManager: tempConditionManager)
+        let conditionManager = viewModel!.conditionManager
+        let viewModel = BudgetViewModel(conditionManager: conditionManager)
         let budgetViewController = BudgetViewController.create(viewModel: viewModel)
         budgetViewController.accommodationConditionTableViewDataSource = accommodationConditionTableViewDataSource
+        self.navigationItem.backButtonTitle = CalendarViewModel.ButtonTitle.back
         self.navigationController?.pushViewController(budgetViewController, animated: true)
     }
     

@@ -24,10 +24,9 @@ final class CalendarViewModel: AnySearchConditionHandleModel<[Month]> {
     }
     
     private let dateSelectionManager: DateSelectionManager
-    private let conditionManager: ConditionManager
     
     enum ButtonTitle {
-        static let backButton = "날짜 선택"
+        static let back = "날짜 선택"
         static let pass = "건너뛰기"
         static let next = "다음"
         static let cancel = "지우기"
@@ -38,10 +37,10 @@ final class CalendarViewModel: AnySearchConditionHandleModel<[Month]> {
     
     init(dateSelectionManager: DateSelectionManager, conditionManager: ConditionManager) {
         self.dateSelectionManager = dateSelectionManager
-        self.conditionManager = conditionManager
+        super.init(conditionManager: conditionManager)
     }
     
-    convenience init(conditionManager: ConditionManager) {
+    convenience override init(conditionManager: ConditionManager) {
         self.init(dateSelectionManager: DateSelectionManager(), conditionManager: conditionManager)
     }
     

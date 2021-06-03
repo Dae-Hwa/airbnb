@@ -12,7 +12,7 @@ class ConditionManager {
     private var location: Location
     private var period: Period
     private var charge: Charge
-    private var headcount: Int?
+    private var headcount = 1
     
     init(location: Location) {
         self.location = location
@@ -24,8 +24,18 @@ class ConditionManager {
         let locationInfo = location.name
         let periodInfo = period.description
         let chargeInfo = charge.description
-        let headcountInfo = ""
+        let headcountInfo = "게스트: \(headcount)명"
         return [locationInfo, periodInfo, chargeInfo, headcountInfo]
+    }
+    
+    func query() -> AccommodationQuery? {
+        guard let checkinDate = period.checkIn,
+              let startPrice = charge.minimum,
+              let endPrice = charge.maximum else { return nil }
+        return AccommodationQuery(checkinDate: checkinDate,
+                                  checkoutDate: period.checkOut,
+                                  startPrice: startPrice,
+                                  endPrice: endPrice)
     }
     
     func updatePeriod(with dates: [Date?]) {

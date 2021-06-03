@@ -59,6 +59,11 @@
 		E4E63CB12667260A00F86104 /* BudgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E63CB02667260A00F86104 /* BudgetViewModel.swift */; };
 		E4E63CB32667509300F86104 /* BudgetManageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E63CB22667509300F86104 /* BudgetManageModel.swift */; };
 		E4E63CB52667557D00F86104 /* BudgetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E63CB42667557D00F86104 /* BudgetManager.swift */; };
+		E4E63CC326676AFF00F86104 /* AccommodationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E63CC226676AFF00F86104 /* AccommodationListViewController.swift */; };
+		E4E63CC52667705D00F86104 /* AccommodationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E63CC42667705D00F86104 /* AccommodationCollectionViewCell.swift */; };
+		E4E63CC72667B54000F86104 /* AccommodationCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E63CC62667B54000F86104 /* AccommodationCollectionViewDataSource.swift */; };
+		E4E63CCA26686BCE00F86104 /* AccommodationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E63CC926686BCE00F86104 /* AccommodationCard.swift */; };
+		E4E63CCC26686BE000F86104 /* AccommodationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E63CCB26686BE000F86104 /* AccommodationDTO.swift */; };
 		E4F302A32655F71E002C9770 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E4F302A22655F71E002C9770 /* Alamofire */; };
 		E4F302A52655F837002C9770 /* AlamofireRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F302A42655F837002C9770 /* AlamofireRequestManager.swift */; };
 		E4F302A72655F84B002C9770 /* AlamofireNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F302A62655F84B002C9770 /* AlamofireNetworkManager.swift */; };
@@ -149,6 +154,11 @@
 		E4E63CB02667260A00F86104 /* BudgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetViewModel.swift; sourceTree = "<group>"; };
 		E4E63CB22667509300F86104 /* BudgetManageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetManageModel.swift; sourceTree = "<group>"; };
 		E4E63CB42667557D00F86104 /* BudgetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetManager.swift; sourceTree = "<group>"; };
+		E4E63CC226676AFF00F86104 /* AccommodationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccommodationListViewController.swift; sourceTree = "<group>"; };
+		E4E63CC42667705D00F86104 /* AccommodationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccommodationCollectionViewCell.swift; sourceTree = "<group>"; };
+		E4E63CC62667B54000F86104 /* AccommodationCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccommodationCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		E4E63CC926686BCE00F86104 /* AccommodationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccommodationCard.swift; sourceTree = "<group>"; };
+		E4E63CCB26686BE000F86104 /* AccommodationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccommodationDTO.swift; sourceTree = "<group>"; };
 		E4F302A42655F837002C9770 /* AlamofireRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireRequestManager.swift; sourceTree = "<group>"; };
 		E4F302A62655F84B002C9770 /* AlamofireNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireNetworkManager.swift; sourceTree = "<group>"; };
 		E4F302A82655F890002C9770 /* AlamofireImageLoadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireImageLoadManager.swift; sourceTree = "<group>"; };
@@ -293,9 +303,8 @@
 			isa = PBXGroup;
 			children = (
 				E4DB1CF826524A7700894DCB /* Main.storyboard */,
-				E4F302F62656B3AB002C9770 /* UseCase */,
-				E4F303002656B9C3002C9770 /* ViewModel */,
-				E4F302F52656B39D002C9770 /* ViewController */,
+				E4E63CBD26676A6400F86104 /* Home */,
+				E4E63CBE26676A7200F86104 /* AccommodationList */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -433,6 +442,60 @@
 			children = (
 				E4E63CB42667557D00F86104 /* BudgetManager.swift */,
 				E4E63CAC2667220400F86104 /* Budget.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E4E63CBD26676A6400F86104 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				E4F302F62656B3AB002C9770 /* UseCase */,
+				E4F303002656B9C3002C9770 /* ViewModel */,
+				E4F302F52656B39D002C9770 /* ViewController */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		E4E63CBE26676A7200F86104 /* AccommodationList */ = {
+			isa = PBXGroup;
+			children = (
+				E4E63CC826686BBE00F86104 /* Model */,
+				E4E63CC026676A9300F86104 /* ViewModel */,
+				E4E63CBF26676A8D00F86104 /* ViewController */,
+				E4E63CC126676A9700F86104 /* View */,
+			);
+			path = AccommodationList;
+			sourceTree = "<group>";
+		};
+		E4E63CBF26676A8D00F86104 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E4E63CC226676AFF00F86104 /* AccommodationListViewController.swift */,
+				E4E63CC62667B54000F86104 /* AccommodationCollectionViewDataSource.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		E4E63CC026676A9300F86104 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E4E63CC126676A9700F86104 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E4E63CC42667705D00F86104 /* AccommodationCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E4E63CC826686BBE00F86104 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E4E63CC926686BCE00F86104 /* AccommodationCard.swift */,
+				E4E63CCB26686BE000F86104 /* AccommodationDTO.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -654,6 +717,8 @@
 				E4E63C68265F314600F86104 /* AccommodationConditionTableViewDataSource.swift in Sources */,
 				E4DB1D7E2653916900894DCB /* PopularLocationTableViewCell.swift in Sources */,
 				E4E63C7A265FBC0100F86104 /* Period.swift in Sources */,
+				E4E63CC326676AFF00F86104 /* AccommodationListViewController.swift in Sources */,
+				E4E63CCA26686BCE00F86104 /* AccommodationCard.swift in Sources */,
 				E4E63CB32667509300F86104 /* BudgetManageModel.swift in Sources */,
 				E4E63C64265F300400F86104 /* CalendarViewModel.swift in Sources */,
 				E4DB1D7C2653912F00894DCB /* PopularLocationViewController.swift in Sources */,
@@ -668,6 +733,7 @@
 				E4E63C78265FAB5900F86104 /* DateFormatter.swift in Sources */,
 				E4F302F42656B257002C9770 /* ImageLoadManagable.swift in Sources */,
 				E4F302FA2656B3EE002C9770 /* HeroImageUseCase.swift in Sources */,
+				E4E63CC72667B54000F86104 /* AccommodationCollectionViewDataSource.swift in Sources */,
 				E4F302A52655F837002C9770 /* AlamofireRequestManager.swift in Sources */,
 				E4E63C76265FAA2000F86104 /* ConditionManager.swift in Sources */,
 				E4E63C932664B16300F86104 /* CalendarCoordinate.swift in Sources */,
@@ -685,10 +751,12 @@
 				E42671A6265BD357009323B8 /* SearchBarFactory.swift in Sources */,
 				E4E63C59265E71E300F86104 /* CalendarCollectionViewCell.swift in Sources */,
 				E4E63C8C266366D900F86104 /* AnySearchConditionHandleModel.swift in Sources */,
+				E4E63CC52667705D00F86104 /* AccommodationCollectionViewCell.swift in Sources */,
 				E4F302CD26564FCE002C9770 /* ViewControllerFactory.swift in Sources */,
 				E4E63C7C265FBC3600F86104 /* Charge.swift in Sources */,
 				E4E63C7F265FC06600F86104 /* CalendarManager.swift in Sources */,
 				E481480C265496930069BE20 /* LocationSearchController.swift in Sources */,
+				E4E63CCC26686BE000F86104 /* AccommodationDTO.swift in Sources */,
 				E4F302DD2656746E002C9770 /* PopularLocationLoadUseCase.swift in Sources */,
 				E4E63C5B265F1FA400F86104 /* MonthHeaderCollectionViewCell.swift in Sources */,
 				E4F302C6265642D8002C9770 /* SearchResultUseCase.swift in Sources */,
