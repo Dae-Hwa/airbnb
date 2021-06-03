@@ -20,11 +20,6 @@ const SearchButton = ({ size }) => {
 
   const checkinDate = checkInMoment?.format('YYYY-MM-DD');
   const checkoutDate = checkOutMoment?.format('YYYY-MM-DD');
-  const startPrice = minPrice;
-  const endPrice = maxPrice;
-  const numberOfAdults = adults;
-  const numberOfChildren = children;
-  const numberOfBabies = infants;
 
   const { setHotelListData } = useContext(HotelListContext);
 
@@ -35,7 +30,7 @@ const SearchButton = ({ size }) => {
 
   const handleClickSearchBtn = async () => {
     const { data } = await axios.get(
-      `http://airbnb-team4-mockup.herokuapp.com/accommodations?checkinDate=${checkinDate}&checkoutDate=${checkoutDate}&startPrice=${startPrice}&endPrice=${endPrice}&numberOfAdults=${numberOfAdults}&numberOfChildren=${numberOfChildren}&numberOfBabies=${numberOfBabies}`
+      `http://airbnb-team4-mockup.herokuapp.com/accommodations?checkinDate=${checkinDate}&checkoutDate=${checkoutDate}&startPrice=${minPrice}&endPrice=${maxPrice}&numberOfAdults=${adults}&numberOfChildren=${children}&numberOfBabies=${infants}`
     );
 
     setHotelListData(data);
