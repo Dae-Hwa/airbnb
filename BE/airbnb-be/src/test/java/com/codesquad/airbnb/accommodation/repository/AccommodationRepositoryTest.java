@@ -2,6 +2,7 @@ package com.codesquad.airbnb.accommodation.repository;
 
 import com.codesquad.airbnb.accommodation.domain.Accommodation;
 import com.codesquad.airbnb.common.dummydata.AccommodationDummyDataFactory;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -13,6 +14,9 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,6 +31,27 @@ class AccommodationRepositoryTest {
     @Autowired
     AccommodationRepository accommodationRepository;
 
+    @Test
+    void priceStats() {
+        //TODO : 정규분포 가중치 고려해야됨
+        ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
+        for (int i = 0; i < 100000; i++) {
+            accommodationRepository.save(
+                    AccommodationDummyDataFactory.builderWithSuiteRoom()
+                            .accommodationPrice(threadLocalRandom.nextInt(0, 1100000))
+                            .build()
+            );
+        }
+
+        List<Map<String, Object>> result = jdbcTemplate.queryForList(
+                "SELECT TRUNCATE(`price_per_night`, -4) AS `price`,\n" +
+                        "       COUNT(*)\n" +
+                        "FROM `accommodation`\n" +
+                        "GROUP BY `price`;\n"
+        );
+
+        System.out.println(result);
+    }
 
     @ParameterizedTest
     @MethodSource("findOneProvider")
@@ -63,7 +88,7 @@ class AccommodationRepositoryTest {
 
         jdbcTemplate.update(
                 con -> {
-                    PreparedStatement ps = con.prepareStatement("INSERT INTO `user` (name) VALUES (?)", PreparedStatement.RETURN_GENERATED_KEYS);
+                    PreparedStatement ps = con.prepareStatement("INSERT INTO `user` (`name`) VALUES (?)", PreparedStatement.RETURN_GENERATED_KEYS);
                     ps.setString(1, accommodation.getAccommodationHost().getName());
                     return ps;
                 }, keyHolder
