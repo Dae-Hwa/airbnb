@@ -1,17 +1,50 @@
 import styled from 'styled-components';
 import { Center } from '@chakra-ui/react';
 import { useHistory } from 'react-router';
+import axios from 'axios';
 
 import { ReactComponent as SearchIcon } from '../icon/search.svg';
+import { useContext } from 'react';
+import {
+  CalendarContext,
+  HeadCountContext,
+  PriceContext,
+} from './searchBar/SearchBar';
+import { HotelListContext } from '../App';
+import { hotelListMockData } from '../mockData';
 
 const SearchButton = ({ size }) => {
+  // checkinDate, checkoutDate, startPrice, endPrice, numberOfPeople 필요
+
+  const { checkInMoment, checkOutMoment } = useContext(CalendarContext);
+  const { minPrice, maxPrice } = useContext(PriceContext);
+  const { guestCountState } = useContext(HeadCountContext);
+  const { adults, children, infants } = guestCountState;
+
+  const checkinDate = checkInMoment?.format('YYYY-MM-DD');
+  const checkoutDate = checkOutMoment?.format('YYYY-MM-DD');
+  const startPrice = minPrice;
+  const endPrice = maxPrice;
+  const numberOfPeople = adults + children + infants;
+
+  const { hotelListData, setHotelListData } = useContext(HotelListContext);
+
   const history = useHistory();
   const routeToReservationPage = () => {
     history.push('/reservation');
   };
 
+  const handleClickSearchBtn = () => {
+    // const { data } = axios.get(
+    //   `http://airbnb-team4-mockup.herokuapp.com/accommodations?checkinDate=2021-06-03&checkoutDate=2021-06-03&startPrice=0&endPrice=0&numberOfPeople=0`
+    // );
+    const data = hotelListMockData;
+    setHotelListData(data);
+    routeToReservationPage();
+  };
+
   return (
-    <Button size={size} onClick={routeToReservationPage}>
+    <Button size={size} onClick={handleClickSearchBtn}>
       <Center>
         <SearchIcon />
         {size === 'compact' ? <></> : <span>검색</span>}
