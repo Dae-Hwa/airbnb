@@ -40,7 +40,7 @@ DROP TABLE IF EXISTS `airbnb`.`accommodation` CASCADE;
 CREATE TABLE IF NOT EXISTS `airbnb`.`accommodation` (
     `id`                         INT         NOT NULL AUTO_INCREMENT,
     `name`                       VARCHAR(45) NULL,
-    `description`                VARCHAR(45) NULL,
+    `description`                VARCHAR(200) NULL,
     `capacity`                   INT         NULL,
     `accommodation_type`         VARCHAR(45) NULL,
     `bedroom_count`              INT         NULL,
