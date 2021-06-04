@@ -5,14 +5,14 @@ import { mockupAccomodationData } from './mockupCoordinates';
 import { apiKey } from '../../apiKey';
 
 function Map() {
+  const coordinateList = mockupAccomodationData.rooms;
   const [map, setMap] = useState(null);
-  const [center, setCenter] = useState<any>({});
+  const [center, setCenter] = useState<any>({ lat: 37.19118620926743, lng: 127.09339543776579 });
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: apiKey,
   })
 
-  const coordinateList = mockupAccomodationData.rooms;
   const markers = coordinateList.map((coordinate, idx) => <Marker key={idx} position={{ lat: coordinate.latitude, lng: coordinate.longitude }}/>)
   const containerStyle = {
     width: '100%',
@@ -51,7 +51,6 @@ function Map() {
 
 const MapContainer = styled.div`
   width: 100%;
-  padding-left: 10px;
 `
 
 export const MapMemo = memo(Map);

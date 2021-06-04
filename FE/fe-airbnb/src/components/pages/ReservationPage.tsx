@@ -19,10 +19,12 @@ function ReservationPage() {
 }
 
 const SearchResultList = styled.div`
-  width: 40%;
+  width: 45%;
+  height: 100vh;
+  overflow: scroll;
 `
 const SearchResultMap = styled.div`
-  width: 60%;
+  width: 55%;
 `
 
 const Title = styled.h2`
