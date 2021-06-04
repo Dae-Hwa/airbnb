@@ -15,8 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -33,22 +31,12 @@ class AccommodationRepositoryTest {
 
     @Test
     void priceStats() {
-        //TODO : 정규분포 가중치 고려해야됨
-        ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
-        for (int i = 0; i < 100000; i++) {
-            accommodationRepository.save(
-                    AccommodationDummyDataFactory.builderWithSuiteRoom()
-                            .accommodationPrice(threadLocalRandom.nextInt(0, 1100000))
-                            .build()
-            );
-        }
-
-        List<Map<String, Object>> result = jdbcTemplate.queryForList(
+        List<AccommodationPriceStats> result = jdbcTemplate.query(
                 "SELECT TRUNCATE(`price_per_night`, -4) AS `price`,\n" +
-                        "       COUNT(*)\n" +
+                        "       COUNT(*) AS `count`\n" +
                         "FROM `accommodation`\n" +
                         "GROUP BY `price`;\n"
-        );
+                , new AccommodationPriceStatsRowMapper());
 
         System.out.println(result);
     }
@@ -138,5 +126,10 @@ class AccommodationRepositoryTest {
                     accommodation.getId(), keyHolder.getKey().longValue(), false
             );
         }
+    }
+
+    @Test
+    void findAll() {
+        accommodationRepository.findAllBy(null);
     }
 }
