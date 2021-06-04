@@ -65,7 +65,7 @@ SELECT `accommodation`.`id`,
        `accommodation_host_user_id`,
        (SELECT COUNT(*) FROM `review` WHERE `accommodation_id` = `accommodation`.`id`)      AS `review_counts`,
        (SELECT AVG(`rating`) FROM `review` WHERE `accommodation_id` = `accommodation`.`id`) AS `review_rating`,
-       (SELECT `url` FROM `image` JOIN `accommodation_has_image` `ahi` ON `image`.`id` = `ahi`.`image_id` WHERE `accommodation_id` = :id AND is_main_image) AS `main_image`
+       (SELECT `url` FROM `image` JOIN `accommodation_has_image` `ahi` ON `image`.`id` = `ahi`.`image_id` WHERE `accommodation_id` = `accommodation`.`id` AND is_main_image) AS `main_image`
 FROM `accommodation`
 WHERE 1=1
     """
