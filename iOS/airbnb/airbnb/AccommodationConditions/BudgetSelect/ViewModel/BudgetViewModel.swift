@@ -31,7 +31,27 @@ final class BudgetViewModel: AnySearchConditionHandleModel<[Budget]> {
     
     override func bind(dataHandler: @escaping DataHandler, conditionHandler: @escaping ConditionHandler) {
         super.bind(dataHandler: dataHandler, conditionHandler: conditionHandler)
-        budgetManager = BudgetManager(budgets: createMock())
+        getPriceData()
+    }
+    
+    private let networkManager = AlamofireNetworkManager(with: MockAPI.baseUrl)
+    
+    private func getPriceData() {
+        networkManager.get(decodingType: [Budget].self,
+                           endPoint: MockAPI.EndPoint.priceChart, parameter: nil) { [weak self] result in
+            switch result {
+            case .success(let budgets):
+                self?.createBudgetManager(with: budgets)
+            case .failure(let error):
+                print(error)
+                let mockBudget = self?.createMock() ?? []
+                self?.createBudgetManager(with: mockBudget)
+            }
+        }
+    }
+    
+    private func createBudgetManager(with budgets: [Budget]) {
+        budgetManager = BudgetManager(budgets: budgets)
         self.budgets = budgetManager?.budgets
     }
     
